@@ -1,7 +1,52 @@
-let secretWord = 'Simple password',
+let secretWord = 'Sssa',
     newTitle = '',
     imageNumber = 0,
-    chances = 10;
+    chances = 10,
+    click = 0,
+    count = '00',
+    interval,
+    m = '00',
+    s = '00',
+    ms = '00',
+    timeResult = '00:00:00';
+
+// show timre result on the end of game;
+const showTimeResult = () => {
+    document.getElementById('game-time').innerHTML = timeResult;
+}
+// stopwatch;
+const stopwatch = () => {
+    const el = document.getElementById('stopwatch');
+    let time;
+    count++
+    ms = count;
+    if(ms <= 9){
+        ms = `0${ms}`;
+    }
+    if(ms >= 99){
+        count = '00';
+        s++
+        if(s <= 9){
+            s = `0${s}`;
+        }
+    }
+    if(s >= 60){
+        el.style.border = '.1rem solid rgba(200, 30, 30, .8)';
+        setTimeout(() => {
+            el.style.border = '.1rem solid rgba(0,0,0,0)';
+        }, 500);
+    }
+    if(s >= 60){
+        s = '00';
+        m++;
+        if(m <= 9){
+            m = `0${m}`;
+        }
+    }       
+    time = `${m}:${s}:${ms}`;
+    timeResult = time;
+    el.innerHTML = time;
+}
 // get new sentence from input;
 const getNewSentence = () => {
     const inputVal = document.getElementById('input'),
@@ -16,6 +61,7 @@ const getNewSentence = () => {
         imageNumber = 0;
         setSecretWord();
         changeImage();
+        click = 0;
     }else {
         inputError.style.display = 'block';
     }
@@ -44,6 +90,7 @@ const changeImage = () => {
     document.getElementById('game-image').style.backgroundImage = 'url(./img/gibbet' + imageNumber + '.png)';
     imageNumber++;
     if(imageNumber > 10){
+        clearInterval(interval);
         showLayer('loss');
     }
 }
@@ -80,11 +127,15 @@ const showLayer = str => {
     }
     layerTitle.innerHTML = title;
     layer.style.display = 'block';
+    document.getElementById('game-result').classList.add('animate-end-game');
+    document.getElementById('game-result').classList.remove('opacity-hidden');
+    showTimeResult();
 }
 // check if won game;
 const gameWon = () => {
     const title = document.getElementById('game-title').innerHTML;
     if(title.indexOf("_") < 0){
+        clearInterval(interval);
         showLayer('win');
     }
 }
@@ -92,6 +143,11 @@ const gameWon = () => {
 const clickButton = e => {
     const currentSymbol = e.target.innerHTML.toLowerCase(),
         currentEl = e.target;
+    // start the stopwatch only after first click;
+    if(click === 0){
+        interval = setInterval(stopwatch, 10);
+        click++;
+    }
     currentEl.removeEventListener('click', clickButton);
     // check if symbol exist in hidden word;
     if(symbolExist(currentSymbol) > 0){

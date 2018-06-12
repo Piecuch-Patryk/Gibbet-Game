@@ -62,7 +62,25 @@ body {
 }
 .game-container {
     display: flex;
-    padding: 2rem 0;
+    padding: 2rem 0 .5rem 0;
+    border-bottom: .025rem solid #ddd;
+    position: relative;
+}
+.game-container::before,
+.game-container::after {
+    content: '';
+    position: absolute;
+    bottom: -.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: .5rem;
+    border-bottom: .075rem solid var(--greenColor);
+}
+.game-container::after {
+    bottom: -1rem;
+    width: 80%;
+    border-bottom: .05rem solid var(--redColor);
 }
 .game-title {
     padding: 1rem;
@@ -82,6 +100,7 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    position: relative;
 }
 .chances {
     color: var(--redColor);
@@ -91,6 +110,18 @@ body {
 .chances span {
     margin: .2rem;
 }
+.stopwatch {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    font-size: 1.5rem;
+    text-shadow: 0 0 .01rem var(--greenColor);
+    padding: .4rem;
+    border: .1rem solid rgba(0, 0, 0, 0);
+    border-radius: 1rem;
+    box-shadow: inset 0 0 .05rem var(--greenColor);
+}
+
 .buttons {
     display: flex;
     flex-wrap: wrap;
@@ -112,14 +143,6 @@ body {
     transform: scale(1.07);
     transition: .3s;
 }
-.page-footer {
-    text-align: center;
-    padding: 1rem;
-}
-.page-footer a {
-    color: #ddd;
-    text-decoration: none;
-}
 .btnSuccess {
     background-color: var(--greenColor);
 }
@@ -128,10 +151,10 @@ body {
 }
 .top-layer {
     position: absolute;
-    top: 0;
+    top: 10%;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 80%;
     background-color: rgba(0, 0, 0, .8);
     display: none;
     z-index: 100;
@@ -151,6 +174,31 @@ body {
     letter-spacing: .2rem;
     color: var(--redColor);
 }
+.end-game {
+    width: 100%;
+}
+.game-result p {
+    font-size: 1.5rem;
+    color: var(--redColor);
+    background-color: rgba(255, 255, 255, .85);
+    padding: 1rem 5rem;
+    box-shadow: inset 0 0 .2rem var(--redColor);
+}
+.opacity-hidden {
+    opacity: 0;
+}
+.best-results {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 1rem 3rem;
+    margin: 2rem;
+    list-style: none;
+    border: .05rem solid #ddd;
+    background-color: rgba(0, 0, 0, .5);
+}
+.best-results li {
+    margin: .2rem;
+}
 .title-loss {
     color: var(--redColor);
 }
@@ -168,6 +216,14 @@ body {
 .btn-refresh:hover {
     cursor: pointer;
     filter: brightness(125%);
+}
+.page-footer {
+    text-align: center;
+    padding: 2.5rem 0 .5rem 0;
+}
+.page-footer a {
+    color: #ddd;
+    text-decoration: none;
 }
 @media screen and (orientation: portrait){
     .container {

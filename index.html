@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="./styles/main.css">
     <!--font awesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!--css animations-->
+    <link rel="stylesheet" href="./styles/animations.css">
 </head>
 <body>
     <header class="container">
@@ -27,12 +29,26 @@
         <div class="game-container">
             <section id="game-image" class="image">
                 <p class="chances"><i class="fas fa-heartbeat"></i><span id="game-chances"></span></p>
+                <div id="stopwatch" class="stopwatch">00:00:00</div>
             </section>
             <section id="game-buttons" class="buttons"></section>
         </div>
         <div id="top-layer" class="top-layer">
             <div>
                 <h3 id="layer-title" class="layer-title"></h3>
+                <section class="end-game">
+                    <div class="game-result">
+                        <p id="game-result">Your time is: <span id="game-time">00:00:00</span></p>
+                    </div>
+                    <div>
+                        <ul class="best-results">Best Results
+                            <li>Adam 00:01:25</li>
+                            <li>Jake 00:03:23</li>
+                            <li>Sue 00:05:15</li>
+                            <li>Jamie 00:10:51</li>
+                        </ul>
+                    </div>
+                </section>
                 <button class="btn-refresh" type="button">Refresh page</button>
             </div>
         </div>
