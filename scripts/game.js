@@ -1,6 +1,7 @@
 let secretWord = 'Simple password',
     newTitle = '',
-    imageNumber = 0;
+    imageNumber = 0,
+    chances = 10;
 // get new sentence from input;
 const getNewSentence = () => {
     const inputVal = document.getElementById('input'),
@@ -33,6 +34,10 @@ const setSecretWord = () => {
     }
     hiddenSecretWord = hiddenSecretWord.join('');
     document.getElementById('game-title').innerHTML = hiddenSecretWord;
+}
+// change chances dynamically (10-0);
+const chancesLeft = () => {
+    document.getElementById('game-chances').innerHTML = chances;
 }
 // change game image when wrong symbol choosen;
 const changeImage = () => {
@@ -101,6 +106,9 @@ const clickButton = e => {
         currentEl.classList.add('btnError');
         // change game image - gibbet;
         changeImage();
+        // decrement and show chances left;
+        chances--;
+        chancesLeft();
     }
 }
 // create buttons - letters and digits;
@@ -124,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     createButtons();
     setSecretWord();
     changeImage();
+    chancesLeft();
     // refresh page button;
     document.querySelectorAll('.btn-refresh').forEach(el => {
         el.addEventListener('click', () => {

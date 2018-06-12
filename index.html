@@ -5,22 +5,29 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Gibbet Game - javaScript</title>
     <link rel="stylesheet" href="./styles/main.css">
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 <body>
     <header class="container">
         <section class="main-title">
-            <h1>Gibbet Game!</h1>
+            <div>
+                <h1>Hangman Game!</h1>
+                <p class="subtitle">Don't do this at home!</p>
+            </div>
         </section>
         <section class="input-field">
             <input type="password" id="input" placeholder="type secret sentence">
             <p class="input-notice">Use letters and digits only</p>
-            <button type="button" id="btn-play" class="btn-play">Play!</button>
+            <button type="button" id="btn-play" class="btn-play">Submit</button>
         </section>
     </header>
     <main>
         <h2 id="game-title" class="game-title"></h2>
         <div class="game-container">
-            <section id="game-image" class="image"></section>
+            <section id="game-image" class="image">
+                <p class="chances"><i class="fas fa-heartbeat"></i><span id="game-chances"></span></p>
+            </section>
             <section id="game-buttons" class="buttons"></section>
         </div>
         <div id="top-layer" class="top-layer">
