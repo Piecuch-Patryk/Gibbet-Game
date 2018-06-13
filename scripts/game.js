@@ -52,7 +52,8 @@ const getNewSentence = () => {
     const inputVal = document.getElementById('input'),
         inputError = document.querySelector('.input-notice'),
         // only letters and digits;
-        pattern = new RegExp(/^([a-zA-Z0-9 ]+)$/);
+        pattern = new RegExp(/^([a-zA-Z0-9 ]+)$/),
+        stopwatchEl = document.getElementById('stopwatch');
     inputError.style.display = 'none';
     if(pattern.test(inputVal.value)){
         secretWord = inputVal.value;
@@ -60,14 +61,14 @@ const getNewSentence = () => {
         newTitle = '';
         imageNumber = 0;
         setSecretWord();
+        showLayer('hide');
         changeImage();
         click = 0;
+        stopwatchEl.innerHTML = timeResult;
     }else {
         inputError.style.display = 'block';
     }
 }
-// listen form submit with new sentence;
-document.getElementById('btn-play').addEventListener('click', getNewSentence);
 // place secret word as a hidden game title;
 const setSecretWord = () => {
     let hiddenSecretWord = [];
@@ -114,29 +115,41 @@ const symbolExist = str => {
     return found.length;
 }
 // show top-layer winner/looser;
-const showLayer = str => {
+const showLayer = (vis, str) => {
     const layerTitle = document.getElementById('layer-title'),
-          layer = document.getElementById('top-layer');
-    let title = '';
-    if(str === 'win'){
-        layerTitle.classList.add('title-win');
-        title = 'You Win!';
+          layer = document.getElementById('top-layer'),
+          resultTime = document.getElementById('game-result');
+    let title = '',
+        img = '';
+    if(vis === 'show'){
+        if(str === 'win'){
+            layerTitle.classList.add('title-win');
+            resultTime.classList.add('title-win');
+            img = './img/firework.gif';
+            title = 'You Win!';
+        }else {
+            layerTitle.classList.add('title-loss');
+            resultTime.classList.add('title-loss');
+            img = './img/gameover.gif';
+            title = 'You Loose!';
+        }
+        layerTitle.innerHTML = title;
+        layer.style.backgroundImage = `url(${img})`;
+        layer.style.display = 'block';
+        document.getElementById('game-result').classList.add('animate-end-game');
+        document.getElementById('game-result').classList.remove('opacity-hidden');
+        showTimeResult();
     }else {
-        layerTitle.classList.add('title-loss');
-        title = 'You Loose!';
+        // hide top layer;
+        layer.style.display = 'none';
     }
-    layerTitle.innerHTML = title;
-    layer.style.display = 'block';
-    document.getElementById('game-result').classList.add('animate-end-game');
-    document.getElementById('game-result').classList.remove('opacity-hidden');
-    showTimeResult();
 }
 // check if won game;
 const gameWon = () => {
     const title = document.getElementById('game-title').innerHTML;
     if(title.indexOf("_") < 0){
         clearInterval(interval);
-        showLayer('win');
+        showLayer('show', 'win');
     }
 }
 // click digit/letter button;
@@ -184,6 +197,8 @@ const createButtons = () => {
         button.addEventListener('click', clickButton);
     });
 }
+// listen form submit with new sentence;
+document.getElementById('btn-play').addEventListener('click', getNewSentence);
 document.addEventListener('DOMContentLoaded', () => {
     createButtons();
     setSecretWord();
