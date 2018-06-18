@@ -1,3 +1,66 @@
+.error-active {
+    opacity: 1;
+    animation: errorActive 1s ease;
+}
+@keyframes errorActive {
+    0% {
+        border: .1rem solid rgba(0,0,0,0);
+        background-color: var(--redColor);
+    }
+    33% {
+        border: .1rem solid var(--redColor);
+        background-color: none;
+    }
+    66% {
+        border: .1rem solid rgba(0,0,0,0);
+        background-color: var(--redColor);
+    }
+    100% {
+        border: .1rem solid var(--redColor);
+        background-color: none;
+    }
+}
+.game-hint-animate {
+    animation: moveLeft 1s ease-in-out;
+}
+.game-hint-hide {
+    animation: moveRight .5s ease-out;
+}
+@keyframes moveRight {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(120%);
+    }
+    50% {
+        transform: translateX(95%);
+    }
+    75% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(99.5%);
+    }
+}
+@keyframes moveLeft {
+    0% {
+        transform: translateX(99.5%);
+    }
+    25% {
+        transform: translateX(-20%);
+    }
+    50% {
+        transform: translateX(10%);
+    }
+    75% {
+        transform: translateX(-5%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
 .animate-end-game {
     animation: endGame .8s ease-in-out;
 }

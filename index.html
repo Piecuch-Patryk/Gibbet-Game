@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Gibbet Game - javaScript</title>
+    <title>Hangman Game - javaScript</title>
     <link rel="stylesheet" href="./styles/main.css">
     <!--font awesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -19,12 +19,20 @@
             </div>
         </section>
         <section class="input-field">
-            <input type="password" id="input" placeholder="type secret sentence">
-            <p class="input-notice">Use letters and digits only</p>
-            <button type="button" id="btn-play" class="btn-play">New Game</button>
+            <div>
+                <input type="password" id="input" placeholder="type secret sentence">
+                <input type="text" id="hint" placeholder="type hint">
+                <p class="input-notice">Use letters and digits only</p>
+            </div>
+            <div>
+                <button type="button" id="btn-play" class="btn-play">New Game</button>
+            </div>
         </section>
     </header>
     <main>
+        <div id="game-hint" class="game-hint">
+            <p>Lorem ipsum dolor temporibus aperiam.</p>
+        </div>
         <h2 id="game-title" class="game-title"></h2>
         <div class="game-container">
             <section id="game-image" class="image">
@@ -66,6 +74,8 @@
     <footer class="page-footer">
         <a href="https://piecuch-patryk.com" title="author">Piecuch Patryk @2018</a>
     </footer>
+    <script src="./scripts/hints-of.js" type="text/javascript"></script>
+    <script src="./scripts/validate.js" type="text/javascript"></script>
     <script src="./scripts/game.js" type="text/javascript"></script>
 </body>
 </html>
