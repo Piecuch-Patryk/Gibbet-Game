@@ -14,7 +14,7 @@ body {
 .container {
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 1rem 1rem 0 1rem;
 }
 .main-title div {
     text-align: center;
@@ -49,13 +49,17 @@ body {
 .input-notice {
     text-align: center;
     font-size: 1rem;
-    background-color: var(--redColor);
-    color: #fff;
     opacity: .95;
+    padding: .2rem;
     border: .1rem solid rgba(0,0,0,0);
     border-radius: .1rem;
+    transition: .5s;
     /*hidden*/
     opacity: 0;
+}
+.error-active {
+    opacity: 1;
+    border-color: var(--redColor);
 }
 .btn-play {
     border: none;
@@ -298,6 +302,9 @@ main {
     .input-field {
         width: 100%;
     }
+    .btn-play {
+        transform: translateY(.5rem);
+    }
     .game-title {
         margin: 0 auto;
     }
@@ -318,5 +325,10 @@ main {
     }
     .permition-title {
         font-size: 1.2rem;
+    }
+}
+@media screen and (max-width: 1012px){
+    .btn-play {
+        transform: translateY(.5rem);
     }
 }

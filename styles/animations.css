@@ -1,25 +1,3 @@
-.error-active {
-    opacity: 1;
-    animation: errorActive 1s ease;
-}
-@keyframes errorActive {
-    0% {
-        border: .1rem solid rgba(0,0,0,0);
-        background-color: var(--redColor);
-    }
-    33% {
-        border: .1rem solid var(--redColor);
-        background-color: none;
-    }
-    66% {
-        border: .1rem solid rgba(0,0,0,0);
-        background-color: var(--redColor);
-    }
-    100% {
-        border: .1rem solid var(--redColor);
-        background-color: none;
-    }
-}
 .game-hint-animate {
     animation: moveLeft 1s ease-in-out;
 }
