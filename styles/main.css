@@ -87,21 +87,23 @@ main {
     right: 0;
     transform: translateX(99.5%);
     line-height: 2rem;
+    padding: 0 1rem;
     color: #333;
 }
 .game-hint::before {
     content: '?';
     position: absolute;
     top: 0;
-    left: -2rem;
+    left: -3rem;
     color: var(--redColor);
     font-weight: bold;
     font-size: 2rem;
+    padding: 0 1rem;
     transition: .2s;
 }
 .game-hint:hover::before {
     cursor: pointer;
-    left: -2.5rem;
+    left: -3.5rem;
     transform: scale(1.05);
 }
 .hide-before::before {

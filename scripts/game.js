@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         s = '00',
         ms = '00',
         timeResult = '00:00:00';
+        isGameStarted = false;
 
     // show timre result on the end of game;
     const showTimeResult = () => {
@@ -51,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // get new sentence from input;
     const getNewSentence = () => {
         const inputVal = document.getElementById('input'),
-            inputError = document.querySelector('.input-notice'),
             stopwatchEl = document.getElementById('stopwatch');
+
+        if(inputVal.value === '') return;
         secretWord = inputVal.value;
         inputVal.value = '';
         newTitle = '';
@@ -61,13 +63,16 @@ document.addEventListener('DOMContentLoaded', () => {
         setHint();
         showLayer('hide');
         changeImage();
+        startGame();
         click = 0;
         stopwatchEl.innerHTML = timeResult;
     }
     // place hint of sentence;
     const setHint = () => {
-        const hint = document.getElementById('hint').value;
-        
+        const hint = document.getElementById('hint');
+        const container = document.getElementById('game-hint');
+        container.innerText = hint.value;
+        hint.value = '';
     }
     // place secret word as a hidden game title;
     const setSecretWord = () => {
@@ -88,12 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // change game image when wrong symbol choosen;
     const changeImage = () => {
+        if(imageNumber >= 10){
+            clearInterval(interval);
+            showLayer('show', 'lose');
+            return;
+        }
         document.getElementById('game-image').style.backgroundImage = 'url(./img/gibbet' + imageNumber + '.png)';
         imageNumber++;
-        if(imageNumber > 10){
-            clearInterval(interval);
-            showLayer('loss');
-        }
     }
     // show found symbol;
     const showSymbol = (str, num) => {
@@ -125,12 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if(str === 'win'){
                 layerTitle.classList.add('title-win');
                 resultTime.classList.add('title-win');
-                img = './img/firework.gif';
                 title = 'You Win!';
             }else {
                 layerTitle.classList.add('title-loss');
                 resultTime.classList.add('title-loss');
-                img = './img/gameover.gif';
                 title = 'You Loose!';
             }
             layerTitle.innerHTML = title;
@@ -154,13 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // click digit/letter button;
     const clickButton = e => {
+        if(!isGameStarted) return;
         const currentSymbol = e.target.innerHTML.toLowerCase(),
             currentEl = e.target;
-        // start the stopwatch only after first click;
-        if(click === 0){
-            interval = setInterval(stopwatch, 10);
-            click++;
-        }
+        
         currentEl.removeEventListener('click', clickButton);
         // check if symbol exist in hidden word;
         if(symbolExist(currentSymbol) > 0){
@@ -197,6 +198,16 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', clickButton);
         });
     }
+
+    const startGame = () => {
+        // start the stopwatch only after first click;
+        if(click === 0){
+            interval = setInterval(stopwatch, 10);
+            click++;
+            isGameStarted = true;
+        }
+    }
+
     // listen form submit with new sentence;
     document.getElementById('btn-play').addEventListener('click', getNewSentence);
 
